@@ -39,6 +39,22 @@ body {
             display: block;
             margin: 0 auto 16px;
         }
+        h1{
+        	display:none;
+        }
+        .tip{
+        	background-color:#eee;
+        	font-family:corbel;
+        	width:70%;
+        	font-size:18px;
+        	position: absolute;
+        	top:2%;
+        	left:12.5%;
+        	display:block;
+        	opacity:0.5;
+        	padding:1%;
+
+        }
 </style>
 </head>
 <body onload="startGame()" onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">
@@ -54,12 +70,15 @@ var bground;
 
 // var backimg = new image();
 // backimg.src="background.jpg";
+document.addEventListener("click", function(){
+    document.getElementById("tip").classList.remove("tip");
+});
 
 function startGame() {
 
     myGamePiece = new component(40, 50, "dickbutt.png", 10, 120,"image");
     myGamePiece.gravity = 0.05;
-    myScore = new component("30px", "Consolas", "black", 0, 0, "text");
+    myScore = new component("30px", "Consolas", "black", 50,50, "text");
     endmsg = new component("70px", "Consolas", "red", 200, 200, "text");
      //bground= new component(window.innerWidth*0.8,window.innerHeight*0.8,"background.jpg",0,0,"image");
     myGameArea.start();
@@ -197,7 +216,7 @@ function accelerate(n) {
 
 </script>
 <br>
-<p>Tap down to make your dickbutt fly</p>
-<p>Can you make it to the dickbutt dreamland?</p>
+<h1 class="tip" id="tip">Tap down to make your dickbutt fly
+<br>Can you make it to the dickbutt dreamland?</h1>
 </body>
 </html>
