@@ -48,19 +48,25 @@ body {
         	width:70%;
         	font-size:18px;
         	position: absolute;
-        	top:2%;
-        	left:12.5%;
+        	top:10%;
+        	left:13%;
         	display:block;
-        	opacity:0.5;
+        	opacity:0.8;
         	padding:1%;
 
         }
 </style>
+<script
+  src="https://code.jquery.com/jquery-3.0.0.min.js"
+  integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="
+  crossorigin="anonymous"></script>
 </head>
-<body onload="startGame()" onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">
+<body onload="startGame()" onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)" ontouchstart="accelerate(-0.2)" ontouchend="accelerate(0.05)">
 
 
 <script>
+
+
 
 var myGamePiece;
 var myObstacles = [];
@@ -79,7 +85,7 @@ function startGame() {
     myGamePiece = new component(40, 50, "dickbutt.png", 10, 120,"image");
     myGamePiece.gravity = 0.05;
     myScore = new component("30px", "Consolas", "black", 50,50, "text");
-    endmsg = new component("70px", "Consolas", "red", 200, 200, "text");
+    endmsg = new component("70px", "Consolas", "red", 10, 200, "text");
      //bground= new component(window.innerWidth*0.8,window.innerHeight*0.8,"background.jpg",0,0,"image");
     myGameArea.start();
 }
@@ -148,6 +154,10 @@ function component(width, height, color, x, y, type) {
             this.y = rockbottom;
             this.gravitySpeed = 0;
         }
+        else if(this.y<0){
+        	this.y=0;
+        	this.gravitySpeed=0;
+        }
     }
     this.crashWith = function(otherobj) {
         var myleft = this.x;
@@ -179,18 +189,19 @@ function updateGameArea() {
             endmsg.text="YOU DIED";
             endmsg.update();
             document.addEventListener("click",function(){location.reload()});
+            document.addEventListener("tap",function(){location.reload()});
             return;
         } 
     }
     myGameArea.clear();
     myGameArea.frameNo += 1;
     if (myGameArea.frameNo == 1 || everyinterval(150)) {
-        x = myGameArea.canvas.width;
+        x = 1000;
         minHeight = 20;
         maxHeight = 200;
         height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
-        minGap = 70;
-        maxGap = 200;
+        minGap = 90;
+        maxGap = 250;
         gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
         myObstacles.push(new component(10, height, "#3f2a14", x, 0));
         myObstacles.push(new component(10, x - height - gap, "#3f2a14", x, height + gap));
@@ -216,7 +227,7 @@ function accelerate(n) {
 
 </script>
 <br>
-<h1 class="tip" id="tip">Tap down to make your dickbutt fly
-<br>Can you make it to the dickbutt dreamland?</h1>
+<h1 class="tip" id="tip">Tap down to make your dickbutt fly<br>Can you make it to the dickbutt dreamland?</h1>
+
 </body>
 </html>
